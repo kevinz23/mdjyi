@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <?php
     $PAGEMAX = 100;
@@ -45,7 +44,7 @@
         <link rel="shortcut icon" href="favicon.ico">
     </head>
 
-    <body background="http://www.0453.com/images/background.gif" topmargin="0" onselectstart="return false" oncontextmenu="return false" leftmargin="0">
+    <body background="http://www.0453.com/images/background.gif" topmargin="0" leftmargin="0">
         <div align="center">
             <table border="0" width="950" cellspacing="0" cellpadding="0" height="120">
                 <tr>
