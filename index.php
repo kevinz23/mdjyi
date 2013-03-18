@@ -125,12 +125,12 @@ function param_url($typeid, $delta) {
                         <td width='<?php echo $col_width ?>%' valign='top' bgcolor='#E8E8E8'>
                             <table border='0' width='100%' cellpadding='2' cellspacing='3'>
                                 <tr>
-                                    <td width="100%" height='25' class='adtype' bgcolor='#F3FCF8' align='center'>
+                                    <td width="100%" height='25' class='adtype' bgcolor='#98DC98' align='center'>
                                         <font style='font-size:14px' color='#CC0000'><b><?php echo $data[$i]['title'] ?></b></font>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td width="100%" height='133' valign='top' class='adtype' bgcolor='#FFFFFF'><?php echo $data[$i]['content'] ?></td>
+                                    <td width="100%" height='133' valign='top' class='adtype' bgcolor='#E8F7E8'><?php echo $data[$i]['content'] ?></td>
                                 </tr>
                                 <tr>
                                     <td width='100%'><p align='center'><font color='#0066CC'>日期：<?php echo $data[$i]['insert_time'] ?></font></p></td>
