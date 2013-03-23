@@ -1,0 +1,41 @@
+﻿/*globla and reset*/
+body{font-size:12px;font-family:Microsoft Yahei;color:#747474;margin:0;padding:0;background:url(../images/bg.jpg) repeat;}
+table,td,tr,div,img,form{border:0;margin:0;padding:0;}
+ul,li,dl,dt,dd,p,h1,h2,h3{margin:0;list-style:none;padding:0;}
+a{text-decoration:none;color:#4d4d4d;outline:none;}
+a:link{}
+a:visited{}
+a:hover{text-decoration:underline;}
+.pointer{cursor:pointer;}
+.cl{height:0;clear:both;padding:0;margin:0;overflow:hidden;}
+.fl{float:left;display:inline;}
+.fr{float:right;display:inline;}
+.inline-block{display: inline-block;}
+.wrapper .type-list .loading{width:100%;text-align:center;padding:0;margin:0;}
+.add-list .loading{width:100%;text-align:center;padding:0;margin:0;line-height:200px;font-size:13px;}
+
+.banner{position:absolute;top:0;left:0;height:51px;background:url(../images/topbar.png) repeat-x;width:100%;}
+.wrapper{width:980px;margin:0 auto;padding-top:51px;}
+.wrapper .type-list{border:1px solid #E1E3E6;float:left;display:inline;margin:10px auto auto 5px;width:952px;overflow:hidden;padding:5px;background:#fff;}
+.wrapper .type-list li{float:left;display:inline;background:#FFF;line-height:35px;width:73px;text-align:center;font-size:13px;}
+.wrapper .type-list .on{background:#41A8CB;}
+.wrapper .type-list .on a{color:#fff;}
+.steam{margin:5px;display:inline;float:left;}
+.item{width:100%;background:#fff;border:1px solid #E1E3E6;margin:5px auto;}
+.item .title{line-height:43px;height:43px;text-indent:24px;border-left:3px solid #41A8CB;overflow:hidden;color:#F97070;font-size:14px;font-weight:bold;}
+.item .content{padding:10px;text-indent:24px;line-height:24px;}
+.item .time{padding-right:10px;font-size:11px;color:#aaa;line-height:25px;text-align:right;}
+
+/*返回顶部*/
+p#back-to-top{z-index: 1000;position:fixed;bottom:100px;left:50%; margin-left:490px;}
+p#back-to-top a{text-align:center;text-decoration:none;color:#d1d1d1;display:block;width:62px;-moz-transition:color 1s;-webkit-transition:color 1s;-o-transition:color 1s;}
+p#back-to-top a:hover{color:#979797;}
+p#back-to-top a span{background:#d1d1d1 url(../images/backto_top.jpg) no-repeat center center;display:block;height:65px;width:62px;margin-bottom:5px;cursor:pointer;-moz-transition:background 1s;-webkit-transition:background 1s;-o-transition:background 1s;}
+#back-to-top a:hover span{background:#979797 url(../images/backto_top_hover.jpg) no-repeat center center;}
+
+
+
+
+	
+
+

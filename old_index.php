@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <?php
+error_reporting(0);
 $PAGEMAX = 100;
 
 include 'mysqlconnect.php';
