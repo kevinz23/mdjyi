@@ -14,7 +14,10 @@
 	{
 		$block = $connect->fetch('select title,content,insert_time from info where id=?',$data[$i]['id']);
 		if (!count($block))
-			$connect->insert('info',$data[$i]);
+                {
+                    $data[$i]['publish_status'] = 1;
+                    $connect->insert('info',$data[$i]);
+                }
 		else {
 			if ($data[$i]['insert_time'] != $block[0]['insert_time'])
 				$connect->update('info',$data[$i],array('id'=>$data[$i]['id']));
