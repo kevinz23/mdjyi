@@ -13,8 +13,10 @@ a:hover{text-decoration:underline;}
 .inline-block{display: inline-block;}
 .wrapper .type-list .loading{width:100%;text-align:center;padding:0;margin:0;}
 .add-list .loading{width:100%;text-align:center;padding:0;margin:0;line-height:200px;font-size:13px;}
+.wp{width:980px;margin:0 auto;}
 
 .banner{position:absolute;top:0;left:0;height:51px;background:url(../images/topbar.png) repeat-x;width:100%;}
+
 .wrapper{width:980px;margin:0 auto;padding-top:51px;}
 .wrapper .type-list{border:1px solid #E1E3E6;float:left;display:inline;margin:10px auto auto 5px;width:952px;overflow:hidden;padding:5px;background:#fff;}
 .wrapper .type-list li{float:left;display:inline;background:#FFF;line-height:35px;width:73px;text-align:center;font-size:13px;}
@@ -26,6 +28,13 @@ a:hover{text-decoration:underline;}
 .item .content{padding:10px;text-indent:24px;line-height:24px;}
 .item .time{padding-right:10px;font-size:11px;color:#aaa;line-height:25px;text-align:right;}
 
+.pager{float:right;margin-top:10px;}
+.pager ul li{display:inline-block;border:1px solid #E1E3E6;height:20px;text-align:center;line-height:20px;cursor:pointer;}
+.pager ul .page-num{color:#555;width:30px;background:#fff;margin:5px 3px;}
+.pager ul .on{background:#41A8CB;color:#fff;font-weight:bold;}
+.pager ul .pre-page,.pager ul .next-page{color:#555;width:60px;margin:5px 10px;background:#fff;}
+.pager ul .pre-page-disable,.pager ul .next-page-disable{color:#AAA;width:60px;margin:5px 10px;cursor:default;background:#ebebeb;}
+.pager ul .ellipsis{width:60px;border:0;}
 /*返回顶部*/
 p#back-to-top{z-index: 1000;position:fixed;bottom:100px;left:50%; margin-left:490px;}
 p#back-to-top a{text-align:center;text-decoration:none;color:#d1d1d1;display:block;width:62px;-moz-transition:color 1s;-webkit-transition:color 1s;-o-transition:color 1s;}

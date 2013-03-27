@@ -47,7 +47,8 @@ $Jason.typeList = $Class({
             var typeidvalue = $(this).attr("data-id");
             $(this).parent().siblings().removeClass("on");
             $(this).parent().addClass("on");
-            $Jason.dataListIns.arg = {typeid:typeidvalue};
+            $Jason.dataListIns.arg = {typeid:typeidvalue,pager:1};
+             $Jason.dataListIns.recentPage = 1;
             $Jason.dataListIns.load();
         })
     }
@@ -57,6 +58,9 @@ $Jason.typeList = $Class({
 $Jason.dataList = $Class({
     _init:function(def){
         this.arg = $.extend({},def.arg||{});
+        this.totalPage = "";
+        this.recentPage = 1;//默认请求第一页
+        this.data = {};
         this.load();
     },
     load:function(){
@@ -70,11 +74,14 @@ $Jason.dataList = $Class({
         url: "http://mdjyi.com/offlinedata.php?"+urlParam,
         dataType:"jsonp",
         jsonpCallback:"datacbfunc",
-        success: self._render          
-        });
+        success:function(data){
+          self.data = data;
+          self._render();
+        }});
     },
-    _render:function(res){
-        var json = res.data;
+    _render:function(){
+        var json = this.data.data;
+        this.totalPage = this.data.pagenum;
         var tmpl = "";
         var top_arr = [];
         var sec_arr = [];
@@ -99,8 +106,9 @@ $Jason.dataList = $Class({
                break;
             }
         }
-        tmpl = $Jason.dataListIns._templete(1,top_arr)+$Jason.dataListIns._templete(2,sec_arr)+$Jason.dataListIns._templete(3,thir_arr)+$Jason.dataListIns._templete(4,four_arr);
+        tmpl = this._templete(1,top_arr)+this._templete(2,sec_arr)+this._templete(3,thir_arr)+this._templete(4,four_arr);
         $(".add-list").html(tmpl);
+        this._render_page();
     },
     _templete:function(count,arr){
         var tmpl = "";
@@ -123,6 +131,73 @@ $Jason.dataList = $Class({
           }
         }
         return tmpl;
+    },
+    _render_page:function(){
+        var tmpl = "";
+        var ellipsis = "<li class='ellipsis'>......</li>";
+        tmpl += "<ul>"
+        if(this.recentPage!=1){
+            tmpl += "<li class='pre-page page-control'  val='"+(this.recentPage-1)+"'>上一页</li>";   
+        }else{
+            tmpl += "<li class='pre-page-disable'>上一页</li>";
+        }
+        var flag = "";
+        if(this.totalPage>=7){
+          if(this.recentPage<=4){
+              for(var i=0;i<7;i++){
+                 this.recentPage==(i+1) ? flag = "on" : flag = "";
+                 tmpl+= "<li class='page-num page-control "+flag+"' val='"+(i+1)+"'>"+(i+1)+"</li>";
+              }
+              tmpl+=ellipsis;
+              tmpl+="<li class='page-num page-control'  val='"+this.totalPage+"'>"+this.totalPage+"</li>";
+          }else if(this.recentPage>this.totalPage-4){
+              tmpl+="<li class='page-num page-control  val='1'>1</li>";
+              tmpl+=ellipsis;
+              for(var i=(this.totalPage-7);i<this.totalPage;i++){
+                 this.recentPage==(i+1) ? flag = "on" : flag = "";
+                 tmpl+= "<li class='page-num page-control "+flag+"' val='"+(i+1)+"'>"+(i+1)+"</li>";
+              }
+          }else{
+              tmpl+="<li class='page-num page-control  val='1'>1</li>";
+              tmpl+=ellipsis;
+              for(var i=(this.recentPage-3);i<this.recentPage+4;i++){
+                 this.recentPage==(i+1) ? flag = "on" : flag = "";
+                 tmpl+= "<li class='page-num page-control "+flag+"' val='"+(i+1)+"'>"+(i+1)+"</li>";
+              }
+              tmpl+=ellipsis;
+              tmpl+="<li class='page-num page-control'  val='"+this.totalPage+"'>"+this.totalPage+"</li>";
+          }
+        }else{
+          for(var i=0;i<this.totalPage;i++){
+             this.recentPage==(i+1) ? flag = "on" : flag = "";
+             tmpl+= "<li class='page-num page-control "+flag+"' val='"+(i+1)+"'>"+(i+1)+"</li>";
+          }
+        }
+        /*
+        for(var i=0;i<this.totalPage;i++){
+            this.recentPage==(i+1) ? flag = "on" : flag = "";
+            tmpl+= "<li class='page-num page-control "+flag+"' val='"+(i+1)+"'>"+(i+1)+"</li>";
+        }*/
+        if(this.recentPage==this.totalPage){
+             tmpl += "<li class='next-page-disable'>下一页</li>";
+        }else{
+             tmpl += "<li class='next-page page-control' val='"+(this.recentPage+1)+"'>下一页</li>";
+        }
+        tmpl += "</ul>"
+        $(".pager").html(tmpl);
+        this._bind_page();
+    },
+    _bind_page:function(){
+        var self = this;
+        $(".pager ul .page-control").bind("click",function(){
+            if($(this).attr("val")){
+              self.recentPage = parseInt($(this).attr("val"));
+              $(".pager ul .pagenum").eq(self.recentPage).addClass("on");
+              var typeid  = $(".type-list .on").children(0).attr("data-id");
+              self.arg = {pager:$(this).attr("val"),typeid:typeid}
+              self.load();
+            }
+        })
     }
 })
 
