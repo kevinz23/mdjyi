@@ -15,7 +15,7 @@ class InfoController extends Yaf_Controller_Abstract {
         $typeid = $this->getRequest()->getParam('typeid');
         $pager = intval($this->getRequest()->getParam('pager'));
         
-        $pager = $pager == 0 ? 10 : $pager;
+        $pager = $pager == 0 ? 1 : $pager;
         if ($typeid =='')
         {
             $data = $this->infomodel->fetchInfo(($pager - 1)*$this->PAGEMAX, $this->PAGEMAX);
