@@ -28,7 +28,7 @@ $Jason.typeList = $Class({
       $(".type-list").html('<li class="loading">分类读取中...</li>');
       var self = this;
       $.ajax({
-        url: "http://mdjyi.com/offlinetype.php",
+        url: "http://mdjyi.com/index.php/Info/type",
         dataType:"jsonp",
         jsonpCallback:"typecbfunc",
         success: self._render        
@@ -71,7 +71,7 @@ $Jason.dataList = $Class({
       var self = this;
       var urlParam = $.param(this.arg);
       $.ajax({
-        url: "http://mdjyi.com/offlinedata.php?"+urlParam,
+        url: "http://mdjyi.com/index.php/Info/info?"+urlParam,
         dataType:"jsonp",
         jsonpCallback:"datacbfunc",
         success:function(data){
