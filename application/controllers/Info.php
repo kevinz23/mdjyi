@@ -12,7 +12,7 @@ class InfoController extends Yaf_Controller_Abstract {
 
     public function infoAction()
     {
-        $typeid = $_GET['typeid'];
+        $typeid = isset($_GET['typeid']) ? $_GET['typeid'] : '';
         $pager = intval($_GET['pager']);
         
         $pager = $pager == 0 ? 1 : $pager;
