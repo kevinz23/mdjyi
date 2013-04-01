@@ -3,7 +3,7 @@
 class InfoModel
 {
     private $conn = null;
-    function __construct()
+    function __construct() 
     {
         $this->conn = new mysqlconnect(Yaf_Registry::get('dbconfig'));
         $this->conn->connect();
