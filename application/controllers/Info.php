@@ -12,8 +12,8 @@ class InfoController extends Yaf_Controller_Abstract {
 
     public function infoAction()
     {
-        $typeid = $this->getRequest()->getParam('typeid');
-        $pager = intval($this->getRequest()->getParam('pager'));
+        $typeid = $_GET['typeid'];
+        $pager = intval($_GET['pager']);
         
         $pager = $pager == 0 ? 1 : $pager;
         if ($typeid =='')
