@@ -27,7 +27,7 @@ class InfoController extends Yaf_Controller_Abstract {
         $pagenum = round(0.4999 + $infonum / $this->PAGEMAX);
        
         for($i=0;$i<count($data);$i++)
-            $data[$i]['content'] = mb_substr($data[$i]['content'], 0, 75, 'utf-8');
+            $data[$i]['content'] = mb_substr($data[$i]['content'], 0, 85, 'utf-8');
         $backdata = json_encode(array(
             'data'=> $data,
             'infonum' => $infonum,

@@ -1,5 +1,5 @@
 ﻿/*globla and reset*/
-body{font-size:12px;font-family:Microsoft Yahei;color:#747474;margin:0;padding:0;background:url(../images/bg.jpg) repeat;}
+body{font-size:12px;font-family:Microsoft Yahei;color:#585858;margin:0;padding:0;background:url(../images/bg.jpg) repeat;}
 table,td,tr,div,img,form{border:0;margin:0;padding:0;}
 ul,li,dl,dt,dd,p,h1,h2,h3{margin:0;list-style:none;padding:0;}
 a{text-decoration:none;color:#4d4d4d;outline:none;}
@@ -11,10 +11,17 @@ a:hover{text-decoration:underline;}
 .fl{float:left;display:inline;}
 .fr{float:right;display:inline;}
 .inline-block{display: inline-block;}
-.wrapper .type-list .loading{width:100%;text-align:center;padding:0;margin:0;}
-.add-list .loading{width:100%;text-align:center;padding:0;margin:0;line-height:200px;font-size:13px;}
+.wrapper .type-list .loading{width:100%;text-align:center;padding:0;margin:0;margin:20px 0;}
+.add-list .loading{width:100%;text-align:center;padding:0;margin:0;line-height:400px;font-size:13px;}
 .wp{width:980px;margin:0 auto;}
-
+.sprites{background:url(../images/glyphicons-halflings.png) no-repeat;}
+.cover-floor{z-index:1000;position:absolute;width:100%;background:rgba(0,0,0,0.5);left:0;top:0; filter:progid:DXImageTransform.Microsoft.gradient(startcolorstr=#7F000000,endcolorstr=#7F000000);}
+.cover-close{position:absolute;top:20px;right:20px;height:20px;width:20px;font-weight:bold;color:#000;cursor:pointer;font-size:16px;}
+.detail-container{height:470px;width:680px;position:fixed;top:50%;left:50%;margin-left:-340px;margin-top:-235px;background:#fff;}
+.detail-container .title{height:60px;line-height:60px;border-bottom:2px solid #41A8CB;padding-left:20px;font-size:16px;color:#888;}
+.detail-container .content{padding:20px;font-size:12px;color:#888;}
+.detail-container .time{position:absolute;line-height:30px;right:0;bottom:0;cursor:#ddd;font-size:12px;padding:0 20px;text-align:right;}
+.detail-container .loading{top:50%;left:50%;margin-left:-10px;margin-top:-10px;position:absolute;}
 .banner{position:absolute;top:0;left:0;height:51px;background:url(../images/topbar.png) repeat-x;width:100%;}
 
 .wrapper{width:980px;margin:0 auto;padding-top:51px;}
@@ -24,12 +31,13 @@ a:hover{text-decoration:underline;}
 .wrapper .type-list .on a{color:#fff;}
 .steam{margin:5px;display:inline;float:left;}
 .item{width:100%;background:#fff;border:1px solid #E1E3E6;margin:5px auto;}
-.item .title{line-height:43px;height:43px;text-indent:24px;border-left:3px solid #41A8CB;overflow:hidden;color:#F97070;font-size:14px;font-weight:bold;}
-.item .content{padding:10px;text-indent:24px;line-height:24px;}
+.item .title{line-height:43px;height:43px;text-indent:24px;border-left:3px solid #41A8CB;overflow:hidden;color:#F97070;font-size:14px;font-weight:bold;position:relative;}
+.item .title .show-detail{position:absolute;top:15px;right:10px;height:20px;width:20px;background-position:-44px 0;cursor:pointer;}
+.item .content{padding:10px;text-indent:24px;line-height:24px;height:140px;overflow:hidden;}
 .item .time{padding-right:10px;font-size:11px;color:#aaa;line-height:25px;text-align:right;}
 
 .pager{float:right;margin-top:10px;}
-.pager ul li{display:inline-block;border:1px solid #E1E3E6;height:20px;text-align:center;line-height:20px;cursor:pointer;}
+.pager ul li{display:inline-block;*display:inline;zoom:1;border:1px solid #E1E3E6;height:20px;text-align:center;line-height:20px;cursor:pointer;}
 .pager ul .page-num{color:#555;width:30px;background:#fff;margin:5px 3px;}
 .pager ul .on{background:#41A8CB;color:#fff;font-weight:bold;}
 .pager ul .pre-page,.pager ul .next-page{color:#555;width:60px;margin:5px 10px;background:#fff;}

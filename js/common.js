@@ -16,6 +16,46 @@ $Class = function (oDef) {
 //布局配置器
 var CONSTANT_COLUMNS = [{num:1,width:"98.2%"},{num:2,width:"48.6%"},{num:3,width:"32.05%"},{num:4,width:"23.8%"}];
 
+$Jason.detailInfo = $Class({
+    _init:function(def){
+      this.id = "";
+    },
+    load:function(){
+      var tmpl = "";
+      var height = $("body").height()+"px";
+      tmpl += "<div class='cover-floor' style='height:"+height+"'>";
+      tmpl += "<div class='detail-container'>"
+      tmpl += "<div class='loading'><img src='images/loading.gif'></div>";
+      tmpl += "</div></div>";
+      $("body").append(tmpl);
+      this._getData();
+    },
+    _getData:function(){
+        var self = this;
+        $.ajax({
+          url: "http://mdjyi.com/index.php/info/detail/id?id="+this.id,
+          dataType:"jsonp",
+          jsonpCallback:"detailcbfunc",
+          success: self._render        
+        });
+    },
+    _render:function(res){
+      console.log(res);
+        var arr = res;
+        var tmpl = "";
+        tmpl += "<p class='cover-close' onclick='$Jason.detailInfoIns.close();'>X</p>";
+        tmpl += "<p class='title'>"+arr[0].title+"</p>";
+        tmpl += "<p class='content'>"+arr[0].content+"</p>";
+        tmpl += "<p class='time'>"+arr[0].insert_time+"</p>";
+        $(".detail-container").html(tmpl);
+        return tmpl;
+    },
+    close:function(){
+        $(".cover-floor").remove();
+    }
+
+})
+
 $Jason.typeList = $Class({
     _init:function(def){
         this.load();
@@ -25,7 +65,7 @@ $Jason.typeList = $Class({
         this._bind();
     },
     _getData:function(){
-      $(".type-list").html('<li class="loading">分类读取中...</li>');
+      $(".type-list").html('<li class="loading"><img src="images/loading.gif"></li>');
       var self = this;
       $.ajax({
         url: "http://mdjyi.com/index.php/Info/type",
@@ -38,9 +78,10 @@ $Jason.typeList = $Class({
         var tmpl = "";
         var json = res.type;
         for(var i=0;i<json.length;i++){
-          tmpl+="<li><a href='javascript:void(0)' data-id='"+json[i].id+"'>"+json[i].type_name+"</li>";
+          tmpl+="<li><a href='javascript:void(0)' data-id='"+json[i].id+"'>"+json[i].type_name+"</a></li>";
         }
         $(".type-list").html(tmpl);
+
     },
     _bind:function(){
         $(".type-list li a").live("click",function(){
@@ -48,7 +89,7 @@ $Jason.typeList = $Class({
             $(this).parent().siblings().removeClass("on");
             $(this).parent().addClass("on");
             $Jason.dataListIns.arg = {typeid:typeidvalue,pager:1};
-             $Jason.dataListIns.recentPage = 1;
+            $Jason.dataListIns.recentPage = 1;
             $Jason.dataListIns.load();
         })
     }
@@ -65,9 +106,10 @@ $Jason.dataList = $Class({
     },
     load:function(){
         this._getData();
+        this._bind();
     },
     _getData:function(){
-      $(".add-list").html('<li class="loading">列表读取中...</li>');
+      $(".add-list").html('<li class="loading"><img src="images/loading.gif"></li>');
       var self = this;
       var urlParam = $.param(this.arg);
       $.ajax({
@@ -112,15 +154,17 @@ $Jason.dataList = $Class({
     },
     _templete:function(count,arr){
         var tmpl = "";
-        var static_num = Math.floor(arr.length/count);
+        var static_num = Math.round(arr.length/count);
         if(arr.length===0){tmp="";return tmpl;}
         for(var i=0;i<arr.length;i++){
           if(i%static_num==0){
-            tmpl+="<div class='steam' style='width:"+CONSTANT_COLUMNS[count-1].width+"'>";
+            tmpl+="<div class='steam' style='width:"+CONSTANT_COLUMNS[count-1].width+";'>";
           }
           tmpl += "<div class='item'>";
-          tmpl += "<p class='title'>"+arr[i].title+"</p>"
-          tmpl += "<p class='content'>"+arr[i].content+"</p>"
+          tmpl += "<p class='title'>"+arr[i].title+"<em class='show-detail sprites' valId='"+arr[i].id+"' title='点击查看全文' style='display:none;'></em></p>"
+          if(count==1){ tmpl += "<p class='content' style='height:auto;'>"+arr[i].content+"</p>"}else{
+              tmpl += "<p class='content'>"+arr[i].content+"</p>";
+          }
           tmpl += "<p class='time'>发布于："+arr[i].insert_time+"</p>"
           tmpl += "</div>";
           if(i==(arr.length-1)||(i+1)%static_num==0){
@@ -187,6 +231,23 @@ $Jason.dataList = $Class({
         $(".pager").html(tmpl);
         this._bind_page();
     },
+    _bind:function(){
+        var self = this;
+        $(".item").live("mouseenter",function(){
+            $(this).find(".show-detail").show();
+            $(this).one("mouseleave",function(){
+                  $(this).find(".show-detail").hide();
+            })
+        })
+     
+
+        $(".show-detail").live("click",function(){
+            var height = $("body").height()+"px";
+            var id = $(this).attr("valId");
+            $Jason.detailInfoIns.id = id;
+            $Jason.detailInfoIns.load();
+        })
+    },
     _bind_page:function(){
         var self = this;
         $(".pager ul .page-control").bind("click",function(){
@@ -194,16 +255,23 @@ $Jason.dataList = $Class({
               self.recentPage = parseInt($(this).attr("val"));
               $(".pager ul .pagenum").eq(self.recentPage).addClass("on");
               var typeid  = $(".type-list .on").children(0).attr("data-id");
-              self.arg = {pager:$(this).attr("val"),typeid:typeid}
+              if(typeof typeid=="undefined"){
+                 self.arg = {pager:$(this).attr("val")};
+              }else{
+                  self.arg = {pager:$(this).attr("val"),typeid:typeid};
+              }
               self.load();
             }
         })
     }
 })
 
+
+
 $(function(){
     $Jason.typeListIns = new $Jason.typeList({});
     $Jason.dataListIns = new $Jason.dataList({});
+    $Jason.detailInfoIns = new $Jason.detailInfo({});
     //首先将#back-to-top隐藏
     $("#back-to-top").hide();
     //当滚动条的位置处于距顶部100像素以下时，跳转链接出现，否则消
