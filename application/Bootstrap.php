@@ -42,12 +42,6 @@ class Bootstrap extends Yaf_Bootstrap_Abstract{
 		$router->addRoute('dummy', $route);*/
 	}
 
-	public function _initSmarty(Yaf_Dispatcher $dispatcher) {
-		Yaf_Loader::import("smarty/Adapter.php");
-		$smarty = new Smarty_Adapter(null, Yaf_Registry::get("config")->get("smarty"));
-		Yaf_Registry::set("smarty", $smarty);
-	//	$dispatcher->setView($smarty);
-	}
 
 	public function _initDefaultName(Yaf_Dispatcher $dispatcher) {
 		/**
